@@ -83,8 +83,15 @@ namespace EventStoreService
         [ConfigurationProperty("dbPath", IsRequired = true)]
         public string DbPath
         {
-            get { return (string) this["dbPath"]; }
+            get { return (string)this["dbPath"]; }
             set { this["dbPath"] = value; }
+        }
+
+        [ConfigurationProperty("logsPath", IsRequired = false, DefaultValue = null)]
+        public string LogsPath
+        {
+            get { return (string)this["logsPath"]; }
+            set { this["logsPath"] = value; }
         }
 
         [ConfigurationProperty("filePath", IsRequired = true)]
@@ -132,22 +139,30 @@ namespace EventStoreService
 
         private string GetProcessArguments(IPAddress address)
         {
-            address = UseLoopback ? IPAddress.Loopback : address;
-            
             if (address == null) throw new ArgumentNullException("address");
             
             var sb = new StringBuilder();
-            sb.AppendFormat("--ip {0} ", address);
+
             sb.AppendFormat("--tcp-port {0} ", TcpPort);
             sb.AppendFormat("--http-port {0} ", HttpPort);
             sb.AppendFormat("--db {0} ", DbPath);
             sb.AppendFormat("--c {0}", CachedChunkCount);
+
+            if (!UseLoopback)
+            {
+                sb.AppendFormat("--ip {0} ", address);
+            }
+
+            if (!string.IsNullOrWhiteSpace(LogsPath))
+            {
+                sb.AppendFormat("--logsdir {0}", LogsPath);
+            }
             
             if (RunProjections)
             {
                 sb.Append(" --run-projections");
             }
-            
+
             return sb.ToString();
         }
     }
