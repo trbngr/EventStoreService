@@ -140,13 +140,8 @@ namespace EventStoreService
         private string GetProcessArguments(IPAddress address)
         {
             if (address == null) throw new ArgumentNullException("address");
-            
-            var sb = new StringBuilder();
 
-            sb.AppendFormat("--tcp-port {0} ", TcpPort);
-            sb.AppendFormat("--http-port {0} ", HttpPort);
-            sb.AppendFormat("--db {0} ", DbPath);
-            sb.AppendFormat("--c {0}", CachedChunkCount);
+            var sb = new StringBuilder();
 
             if (!UseLoopback)
             {
@@ -157,6 +152,11 @@ namespace EventStoreService
             {
                 sb.AppendFormat("--logsdir {0}", LogsPath);
             }
+
+            sb.AppendFormat("--tcp-port {0} ", TcpPort);
+            sb.AppendFormat("--http-port {0} ", HttpPort);
+            sb.AppendFormat("--db {0} ", DbPath);
+            sb.AppendFormat("--c {0}", CachedChunkCount);
             
             if (RunProjections)
             {
