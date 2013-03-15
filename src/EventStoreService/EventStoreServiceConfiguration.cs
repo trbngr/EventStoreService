@@ -45,7 +45,7 @@ namespace EventStoreService
 
         protected override bool IsElementName(string elementName)
         {
-            return !String.IsNullOrEmpty(elementName) && elementName == ElementName;
+            return !String.IsNullOrEmpty(elementName) && String.Equals(elementName, ElementName, StringComparison.CurrentCulture);
         }
     }
 
@@ -146,7 +146,7 @@ namespace EventStoreService
             sb.AppendFormat("--tcp-port {0} ", TcpPort);
             sb.AppendFormat("--http-port {0} ", HttpPort);
             sb.AppendFormat("--db {0} ", DbPath);
-            sb.AppendFormat("--c {0}", CachedChunkCount);
+            sb.AppendFormat("--c {0} ", CachedChunkCount);
 
             if (!UseLoopback)
             {
@@ -157,13 +157,10 @@ namespace EventStoreService
             {
                 sb.AppendFormat("--logsdir {0} ", LogsPath);
             }
-            
-            if (RunProjections)
-            {
-                sb.Append(" --run-projections");
-            }
 
-            return sb.ToString();
+            string arguments = sb.ToString().Trim();
+
+            return RunProjections ? string.Format("{0} --run-projections", arguments) : arguments;
         }
     }
 }
