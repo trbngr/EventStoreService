@@ -143,6 +143,11 @@ namespace EventStoreService
 
             var sb = new StringBuilder();
 
+            sb.AppendFormat("--tcp-port {0} ", TcpPort);
+            sb.AppendFormat("--http-port {0} ", HttpPort);
+            sb.AppendFormat("--db {0} ", DbPath);
+            sb.AppendFormat("--c {0}", CachedChunkCount);
+
             if (!UseLoopback)
             {
                 sb.AppendFormat("--ip {0} ", address);
@@ -150,13 +155,8 @@ namespace EventStoreService
 
             if (!string.IsNullOrWhiteSpace(LogsPath))
             {
-                sb.AppendFormat("--logsdir {0}", LogsPath);
+                sb.AppendFormat("--logsdir {0} ", LogsPath);
             }
-
-            sb.AppendFormat("--tcp-port {0} ", TcpPort);
-            sb.AppendFormat("--http-port {0} ", HttpPort);
-            sb.AppendFormat("--db {0} ", DbPath);
-            sb.AppendFormat("--c {0}", CachedChunkCount);
             
             if (RunProjections)
             {
