@@ -14,6 +14,13 @@ namespace EventStoreService
             get { return (ServiceInstanceCollection) this[""]; }
             set { this[""] = value; }
         }
+
+        [ConfigurationProperty("filePath", IsRequired = true)]
+        public string FilePath
+        {
+            get { return (string)this["filePath"]; }
+            set { this["filePath"] = value; }
+        }
     }
 
     public class ServiceInstanceCollection : ConfigurationElementCollection
@@ -92,13 +99,6 @@ namespace EventStoreService
         {
             get { return (string)this["logsPath"]; }
             set { this["logsPath"] = value; }
-        }
-
-        [ConfigurationProperty("filePath", IsRequired = true)]
-        public string FilePath
-        {
-            get { return (string) this["filePath"]; }
-            set { this["filePath"] = value; }
         }
 
         [ConfigurationProperty("cachedChunkCount", IsRequired = true)]

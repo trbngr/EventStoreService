@@ -10,22 +10,22 @@ namespace EventStoreService
     {
         private readonly List<Process> _processes;
         private readonly IPAddress _address;
-        private readonly ServiceInstanceCollection _instances;
+        private readonly EventStoreServiceConfiguration _configuration;
 
-        public EventStoreProcessWrapper(IPAddress address, ServiceInstanceCollection instances)
+        public EventStoreProcessWrapper(IPAddress address, EventStoreServiceConfiguration configuration)
         {
             _address = address;
-            _instances = instances;
+            _configuration = configuration;
             _processes = new List<Process>();
         }
 
         public void Start()
         {
-            foreach (ServiceInstance instance in _instances)
+            foreach (ServiceInstance instance in _configuration.Instances)
             {
                 string name = instance.Name.ToLowerInvariant();
 
-                var info = instance.GetProcessStartInfo(instance.FilePath, _address);
+                var info = instance.GetProcessStartInfo(_configuration.FilePath, _address);
                 
                 var process = new Process {StartInfo = info, EnableRaisingEvents = true};
 

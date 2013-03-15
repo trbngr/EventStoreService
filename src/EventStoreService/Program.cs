@@ -9,10 +9,10 @@ namespace EventStoreService
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             var configuration = (EventStoreServiceConfiguration)ConfigurationManager.GetSection("eventStore");
-            var address = GetIPAddress();
+            var address = GetIpAddress();
 
             HostFactory.Run(x =>
             {
@@ -23,7 +23,7 @@ namespace EventStoreService
 
                 x.Service<EventStoreProcessWrapper>(s =>
                 {
-                    s.ConstructUsing(name => new EventStoreProcessWrapper(address, configuration.Instances));
+                    s.ConstructUsing(name => new EventStoreProcessWrapper(address, configuration));
                     s.WhenStarted(tc => tc.Start());
                     s.WhenStopped(tc => tc.Stop());
                 });
@@ -36,7 +36,7 @@ namespace EventStoreService
             Console.ReadLine();
         }
 
-        private static IPAddress GetIPAddress()
+        private static IPAddress GetIpAddress()
         {
             return Dns.GetHostAddresses(Dns.GetHostName()).First(a => a.AddressFamily == AddressFamily.InterNetwork && !a.Equals(IPAddress.Loopback));
         }
