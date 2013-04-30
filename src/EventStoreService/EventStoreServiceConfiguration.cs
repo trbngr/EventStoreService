@@ -68,8 +68,15 @@ namespace EventStoreService
         [ConfigurationProperty("useLoopback", IsRequired = false, DefaultValue = false)]
         public bool UseLoopback
         {
-            get { return (bool) this["useLoopback"]; }
+            get { return (bool)this["useLoopback"]; }
             set { this["useLoopback"] = value; }
+        }
+
+        [ConfigurationProperty("skipDbVerify", IsRequired = false, DefaultValue = false)]
+        public bool SkipDbVerify
+        {
+            get { return (bool)this["skipDbVerify"]; }
+            set { this["skipDbVerify"] = value; }
         }
 
         [ConfigurationProperty("tcpPort", IsRequired = false, DefaultValue = 1113)]
@@ -156,6 +163,11 @@ namespace EventStoreService
             if (!string.IsNullOrWhiteSpace(LogsPath))
             {
                 sb.AppendFormat("--logsdir {0} ", LogsPath);
+            }
+
+            if (SkipDbVerify)
+            {
+                sb.Append("--skip-db-verify ");
             }
 
             string arguments = sb.ToString().Trim();

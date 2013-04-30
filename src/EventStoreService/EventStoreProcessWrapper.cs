@@ -23,17 +23,15 @@ namespace EventStoreService
         {
             foreach (ServiceInstance instance in _configuration.Instances)
             {
-                string name = instance.Name.ToLowerInvariant();
-
                 var info = instance.GetProcessStartInfo(_configuration.FilePath, _address);
-                
+
                 var process = new Process {StartInfo = info, EnableRaisingEvents = true};
 
-                DataReceivedEventHandler outputHandler = (s, e) => File.AppendAllLines(string.Format("{0}-output.log", name), e.Data.Split(Environment.NewLine.ToCharArray()));
-                DataReceivedEventHandler errorHandler = (s, e) => File.AppendAllLines(string.Format("{0}-error.log", name), e.Data.Split(Environment.NewLine.ToCharArray()));
-
-                process.ErrorDataReceived += errorHandler;
-                process.OutputDataReceived += outputHandler;
+//                string name = instance.Name.ToLowerInvariant();
+//                DataReceivedEventHandler outputHandler = (s, e) => File.AppendAllLines(string.Format("{0}-output.log", name), e.Data.Split(Environment.NewLine.ToCharArray()));
+//                DataReceivedEventHandler errorHandler = (s, e) => File.AppendAllLines(string.Format("{0}-error.log", name), e.Data.Split(Environment.NewLine.ToCharArray()));
+//                process.ErrorDataReceived += errorHandler;
+//                process.OutputDataReceived += outputHandler;
 
                 process.Start();
                 process.BeginErrorReadLine();
