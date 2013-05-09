@@ -47,8 +47,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configuration\IServiceConfiguration.cs" />
+    <Compile Include="Configuration\IServiceMetaData.cs" />
+    <Compile Include="Configuration\ServiceMetaData.cs" />
     <Compile Include="EventStoreProcessWrapper.cs" />
-    <Compile Include="EventStoreServiceConfiguration.cs" />
+    <Compile Include="Configuration\ServiceConfiguration.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

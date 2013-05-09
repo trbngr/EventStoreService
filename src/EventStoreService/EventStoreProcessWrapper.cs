@@ -1,28 +1,25 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net;
+using EventStoreService.Configuration;
 
 namespace EventStoreService
 {
     public class EventStoreProcessWrapper
     {
-        private readonly List<Process> _processes;
-        private readonly string _filePath;
+        private Process _process;
+        private readonly IServiceConfiguration _configuration;
         private readonly IPAddress _address;
-        private readonly ServiceInstance _instance;
 
-        public EventStoreProcessWrapper(string filePath, IPAddress address, ServiceInstance instance)
+        public EventStoreProcessWrapper(IServiceConfiguration configuration, IPAddress address)
         {
-            _filePath = filePath;
+            _configuration = configuration;
             _address = address;
-            _instance = instance;
-            _processes = new List<Process>();
         }
 
         public void Start()
         {
-            var info = _instance.GetProcessStartInfo(_filePath, _address);
+            var info = _configuration.GetProcessStartInfo(_address);
 
             var process = new Process { StartInfo = info, EnableRaisingEvents = true };
 
@@ -37,21 +34,19 @@ namespace EventStoreService
             process.BeginOutputReadLine();
 
             process.Exited += (sender, args) => Stop();
-            _processes.Add(process);
+
+            _process = process;
         }
 
         public void Stop()
         {
-            _processes.ForEach(p =>
-            {
-                p.Refresh();
+            _process.Refresh();
 
-                if (p.HasExited) return;
+            if (_process.HasExited) return;
 
-                p.Kill();
-                p.WaitForExit(TimeSpan.FromSeconds(10).Milliseconds);
-                p.Dispose();
-            });
+            _process.Kill();
+            _process.WaitForExit(TimeSpan.FromSeconds(10).Milliseconds);
+            _process.Dispose();
         }
     }
 }

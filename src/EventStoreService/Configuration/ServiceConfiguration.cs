@@ -4,98 +4,23 @@ using System.Diagnostics;
 using System.Net;
 using System.Text;
 
-namespace EventStoreService
+namespace EventStoreService.Configuration
 {
-    public class EventStoreServiceConfiguration : ConfigurationSection
+    public class ServiceConfiguration : ConfigurationSection, IServiceConfiguration
     {
-        [ConfigurationProperty("", IsDefaultCollection = true, IsKey = false, IsRequired = true)]
-        public ServiceInstanceCollection Instances
+        [ConfigurationProperty("service", IsRequired = true)]
+        public ServiceMetaData Service
         {
-            get { return (ServiceInstanceCollection) this[""]; }
-            set { this[""] = value; }
+            get { return (ServiceMetaData) this["service"]; }
+            set { this["service"] = value; }
         }
 
         [ConfigurationProperty("filePath", IsRequired = true)]
         public string FilePath
         {
-            get { return (string)this["filePath"]; }
+            get { return (string) this["filePath"]; }
             set { this["filePath"] = value; }
         }
-    }
-
-    public class ServiceInstanceCollection : ConfigurationElementCollection
-    {
-        protected override string ElementName
-        {
-            get { return "instance"; }
-        }
-
-        public override ConfigurationElementCollectionType CollectionType
-        {
-            get { return ConfigurationElementCollectionType.BasicMap; }
-        }
-
-        public ServiceInstance this[int index]
-        {
-            get { return BaseGet(index) as ServiceInstance; }
-        }
-
-        protected override ConfigurationElement CreateNewElement()
-        {
-            return new ServiceInstance();
-        }
-
-        protected override object GetElementKey(ConfigurationElement element)
-        {
-            return ((ServiceInstance) element).Name;
-        }
-
-        protected override bool IsElementName(string elementName)
-        {
-            return !String.IsNullOrEmpty(elementName) && String.Equals(elementName, ElementName, StringComparison.CurrentCulture);
-        }
-    }
-
-    public class ServiceMetaData : ConfigurationElement
-    {
-        [ConfigurationProperty("name", IsRequired = true)]
-        public string ServiceName
-        {
-            get { return (string)this["name"]; }
-            set { this["name"] = value; }
-        }
-
-        [ConfigurationProperty("description", IsRequired = true)]
-        public string Description
-        {
-            get { return (string)this["description"]; }
-            set { this["description"] = value; }
-        }
-
-        [ConfigurationProperty("displayName", IsRequired = true)]
-        public string DisplayName
-        {
-            get { return (string)this["displayName"]; }
-            set { this["displayName"] = value; }
-        }
-    }
-
-    public class ServiceInstance : ConfigurationElement
-    {
-        [ConfigurationProperty("metaData", IsRequired = true)]
-        public ServiceMetaData MetaData
-        {
-            get { return (ServiceMetaData)this["metaData"]; }
-            set { this["metaData"] = value; }
-        }
-
-        [ConfigurationProperty("name", IsRequired = true)]
-        public string Name
-        {
-            get { return (string) this["name"]; }
-            set { this["name"] = value; }
-        }
-
         [ConfigurationProperty("useLoopback", IsRequired = false, DefaultValue = false)]
         public bool UseLoopback
         {
@@ -113,14 +38,14 @@ namespace EventStoreService
         [ConfigurationProperty("tcpPort", IsRequired = false, DefaultValue = 1113)]
         public int TcpPort
         {
-            get { return (int) this["tcpPort"]; }
+            get { return (int)this["tcpPort"]; }
             set { this["tcpPort"] = value; }
         }
 
         [ConfigurationProperty("httpPort", IsRequired = false, DefaultValue = 2113)]
         public int HttpPort
         {
-            get { return (int) this["httpPort"]; }
+            get { return (int)this["httpPort"]; }
 
             set { this["httpPort"] = value; }
         }
@@ -142,7 +67,7 @@ namespace EventStoreService
         [ConfigurationProperty("cachedChunkCount", IsRequired = true)]
         public int CachedChunkCount
         {
-            get { return (int) this["cachedChunkCount"]; }
+            get { return (int)this["cachedChunkCount"]; }
             set { this["cachedChunkCount"] = value; }
         }
 
@@ -154,20 +79,20 @@ namespace EventStoreService
                 object run = this["runProjections"];
                 if (run != null)
                 {
-                    return (bool) run;
+                    return (bool)run;
                 }
                 return false;
             }
             set { this["runProjections"] = value; }
         }
 
-        public ProcessStartInfo GetProcessStartInfo(string file, IPAddress address)
+        public ProcessStartInfo GetProcessStartInfo(IPAddress address)
         {
             string arguments = GetProcessArguments(address);
 
-            return new ProcessStartInfo(file, arguments)
+            return new ProcessStartInfo(FilePath, arguments)
             {
-                FileName = file,
+                FileName = FilePath,
                 Arguments = arguments,
                 UseShellExecute = false,
                 RedirectStandardError = true,
@@ -201,9 +126,18 @@ namespace EventStoreService
                 sb.Append("--skip-db-verify ");
             }
 
-            string arguments = sb.ToString().Trim();
+            if (RunProjections)
+            {
+                sb.Append("--run-projections ");
+            }
 
-            return RunProjections ? string.Format("{0} --run-projections", arguments) : arguments;
+            return sb.ToString().Trim();
+        }
+
+
+        public static IServiceConfiguration Read()
+        {
+            return (IServiceConfiguration) ConfigurationManager.GetSection("eventStore");
         }
     }
 }

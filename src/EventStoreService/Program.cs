@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Configuration;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
+using EventStoreService.Configuration;
 using Topshelf;
 
 namespace EventStoreService
@@ -11,32 +11,27 @@ namespace EventStoreService
     {
         static void Main()
         {
-            var configuration = (EventStoreServiceConfiguration)ConfigurationManager.GetSection("eventStore");
+            var configuration = ServiceConfiguration.Read();
             var address = GetIpAddress();
 
-            foreach (ServiceInstance instance in configuration.Instances)
+            HostFactory.Run(x =>
             {
-                var metaData = instance.MetaData;
+                x.RunAsLocalSystem();
+                x.StartAutomatically();
+                x.EnableShutdown();
+                x.EnableServiceRecovery(c => c.RestartService(1));
 
-                HostFactory.Run(x =>
+                x.Service<EventStoreProcessWrapper>(s =>
                 {
-                    x.RunAsLocalSystem();
-                    x.StartAutomatically();
-                    x.EnableShutdown();
-                    x.EnableServiceRecovery(c => c.RestartService(1));
+                    s.ConstructUsing(name => new EventStoreProcessWrapper(configuration, address));
+                    s.WhenStarted(tc => tc.Start());
+                    s.WhenStopped(tc => tc.Stop());
+                });
 
-                    x.Service<EventStoreProcessWrapper>(s =>
-                    {
-                        s.ConstructUsing(name => new EventStoreProcessWrapper(configuration.FilePath, address, instance));
-                        s.WhenStarted(tc => tc.Start());
-                        s.WhenStopped(tc => tc.Stop());
-                    });
-
-                    x.SetDescription(metaData.Description);
-                    x.SetDisplayName(metaData.DisplayName);
-                    x.SetServiceName(metaData.ServiceName);
-                }); 
-            }
+                x.SetDescription(configuration.Service.Description);
+                x.SetDisplayName(configuration.Service.DisplayName);
+                x.SetServiceName(configuration.Service.ServiceName);
+            }); 
 
             Console.ReadLine();
         }
