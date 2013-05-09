@@ -56,8 +56,39 @@ namespace EventStoreService
         }
     }
 
+    public class ServiceMetaData : ConfigurationElement
+    {
+        [ConfigurationProperty("name", IsRequired = true)]
+        public string ServiceName
+        {
+            get { return (string)this["name"]; }
+            set { this["name"] = value; }
+        }
+
+        [ConfigurationProperty("description", IsRequired = true)]
+        public string Description
+        {
+            get { return (string)this["description"]; }
+            set { this["description"] = value; }
+        }
+
+        [ConfigurationProperty("displayName", IsRequired = true)]
+        public string DisplayName
+        {
+            get { return (string)this["displayName"]; }
+            set { this["displayName"] = value; }
+        }
+    }
+
     public class ServiceInstance : ConfigurationElement
     {
+        [ConfigurationProperty("metaData", IsRequired = true)]
+        public ServiceMetaData MetaData
+        {
+            get { return (ServiceMetaData)this["metaData"]; }
+            set { this["metaData"] = value; }
+        }
+
         [ConfigurationProperty("name", IsRequired = true)]
         public string Name
         {

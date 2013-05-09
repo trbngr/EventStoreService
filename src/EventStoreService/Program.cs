@@ -14,24 +14,29 @@ namespace EventStoreService
             var configuration = (EventStoreServiceConfiguration)ConfigurationManager.GetSection("eventStore");
             var address = GetIpAddress();
 
-            HostFactory.Run(x =>
+            foreach (ServiceInstance instance in configuration.Instances)
             {
-                x.RunAsLocalSystem();
-                x.StartAutomatically();
-                x.EnableShutdown();
-                x.EnableServiceRecovery(c => c.RestartService(1));
+                var metaData = instance.MetaData;
 
-                x.Service<EventStoreProcessWrapper>(s =>
+                HostFactory.Run(x =>
                 {
-                    s.ConstructUsing(name => new EventStoreProcessWrapper(address, configuration));
-                    s.WhenStarted(tc => tc.Start());
-                    s.WhenStopped(tc => tc.Stop());
-                });
+                    x.RunAsLocalSystem();
+                    x.StartAutomatically();
+                    x.EnableShutdown();
+                    x.EnableServiceRecovery(c => c.RestartService(1));
 
-                x.SetDescription("EventStore Wrapping Service");
-                x.SetDisplayName("EventStore");
-                x.SetServiceName("EventStore");
-            });
+                    x.Service<EventStoreProcessWrapper>(s =>
+                    {
+                        s.ConstructUsing(name => new EventStoreProcessWrapper(configuration.FilePath, address, instance));
+                        s.WhenStarted(tc => tc.Start());
+                        s.WhenStopped(tc => tc.Stop());
+                    });
+
+                    x.SetDescription(metaData.Description);
+                    x.SetDisplayName(metaData.DisplayName);
+                    x.SetServiceName(metaData.ServiceName);
+                }); 
+            }
 
             Console.ReadLine();
         }
