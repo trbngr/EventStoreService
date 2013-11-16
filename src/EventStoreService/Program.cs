@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Linq;
-using System.Net;
-using System.Net.Sockets;
 using EventStoreService.Configuration;
 using Topshelf;
 
@@ -11,8 +8,7 @@ namespace EventStoreService
     {
         static void Main()
         {
-            var configuration = ServiceConfiguration.Read();
-            var address = GetIpAddress();
+            var configuration = EventStoreServiceConfiguration.Instance;
 
             HostFactory.Run(x =>
             {
@@ -23,22 +19,20 @@ namespace EventStoreService
 
                 x.Service<EventStoreProcessWrapper>(s =>
                 {
-                    s.ConstructUsing(name => new EventStoreProcessWrapper(configuration, address));
+                    s.ConstructUsing(name => new EventStoreProcessWrapper(configuration.EventStore));
                     s.WhenStarted(tc => tc.Start());
                     s.WhenStopped(tc => tc.Stop());
                 });
 
-                x.SetDescription(configuration.Service.Description);
-                x.SetDisplayName(configuration.Service.DisplayName);
-                x.SetServiceName(configuration.Service.ServiceName);
+                var windowsService = configuration.WindowsService;
+
+                x.SetDescription(windowsService.Description);
+                x.SetDisplayName(windowsService.DisplayName);
+                x.SetServiceName(windowsService.ServiceName);
             }); 
 
             Console.ReadLine();
         }
 
-        private static IPAddress GetIpAddress()
-        {
-            return Dns.GetHostAddresses(Dns.GetHostName()).First(a => a.AddressFamily == AddressFamily.InterNetwork && !a.Equals(IPAddress.Loopback));
-        }
     }
 }

@@ -47,11 +47,21 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Configuration\IServiceConfiguration.cs" />
-    <Compile Include="Configuration\IServiceMetaData.cs" />
-    <Compile Include="Configuration\ServiceMetaData.cs" />
+    <Compile Include="Configuration\ChunkFooter.cs" />
+    <Compile Include="Configuration\ChunkHeader.cs" />
+    <Compile Include="Configuration\EventStoreElementExtensions.cs" />
+    <Compile Include="Configuration\IPAddressTypeConverter.cs" />
+    <Compile Include="Configuration\Opts.cs" />
+    <Compile Include="Configuration\ConfigurationDesigner.csd.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ConfigurationDesigner.csd</DependentUpon>
+    </Compile>
+    <Compile Include="Configuration\RunMode.cs" />
+    <Compile Include="Configuration\PropertyCommand.cs" />
+    <Compile Include="Configuration\RunProjections.cs" />
+    <Compile Include="Configuration\TFConsts.cs" />
     <Compile Include="EventStoreProcessWrapper.cs" />
-    <Compile Include="Configuration\ServiceConfiguration.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -59,10 +69,27 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Configuration\ConfigurationDesigner.csd">
+      <Generator>CsdFileGenerator</Generator>
+      <LastGenOutput>ConfigurationDesigner.csd.cs</LastGenOutput>
+    </None>
+    <None Include="Configuration\ConfigurationDesigner.csd.config">
+      <DependentUpon>ConfigurationDesigner.csd</DependentUpon>
+    </None>
+    <None Include="Configuration\ConfigurationDesigner.csd.diagram">
+      <DependentUpon>ConfigurationDesigner.csd</DependentUpon>
+    </None>
+    <None Include="Configuration\ConfigurationDesigner.csd.xsd">
+      <DependentUpon>ConfigurationDesigner.csd</DependentUpon>
+      <SubType>Designer</SubType>
+    </None>
     <None Include="install.bat">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
