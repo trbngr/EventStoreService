@@ -1,9 +1,9 @@
 ﻿using System;
 
 // ReSharper disable once CheckNamespace
-public class PropertyCommandAttribute : Attribute
+public class CommandLineArgumentAttribute : Attribute
 {
-    public PropertyCommandAttribute(string command)
+    public CommandLineArgumentAttribute(string command)
     {
         Command = command;
     }

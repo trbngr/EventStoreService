@@ -17,6 +17,12 @@
         <enumerationLiteral name="Cluster" />
       </literals>
     </enumeratedType>
+    <enumeratedType name="ArgumentKind" namespace="EventStoreService.Configuration" codeGenOptions="None">
+      <literals>
+        <enumerationLiteral name="Json" />
+        <enumerationLiteral name="CommandLine" />
+      </literals>
+    </enumeratedType>
     <enumeratedType name="RunProjections" namespace="EventStoreService.Configuration" codeGenOptions="None">
       <literals>
         <enumerationLiteral name="None" />
@@ -71,6 +77,16 @@
             <externalTypeMoniker name="/417279c0-6bf9-47b1-88b0-edbf9effd099/String" />
           </type>
         </attributeProperty>
+        <attributeProperty name="Debug" isRequired="false" isKey="false" isDefaultCollection="false" xmlName="debug" isReadOnly="false" defaultValue="false">
+          <type>
+            <externalTypeMoniker name="/417279c0-6bf9-47b1-88b0-edbf9effd099/Boolean" />
+          </type>
+        </attributeProperty>
+        <attributeProperty name="Arguments" isRequired="false" isKey="false" isDefaultCollection="false" xmlName="arguments" isReadOnly="false" defaultValue="ArgumentKind.Json">
+          <type>
+            <enumeratedTypeMoniker name="/417279c0-6bf9-47b1-88b0-edbf9effd099/ArgumentKind" />
+          </type>
+        </attributeProperty>
       </attributeProperties>
       <elementProperties>
         <elementProperty name="Database" isRequired="true" isKey="false" isDefaultCollection="false" xmlName="database" isReadOnly="false">
@@ -99,9 +115,14 @@
       <attributeProperties>
         <attributeProperty name="InMemory" isRequired="false" isKey="false" isDefaultCollection="false" xmlName="inMemory" isReadOnly="false" documentation="Keep everything in memory, no directories or files are created." browsable="false" defaultValue="true">
           <customAttributes>
-            <attribute name="PropertyCommand">
+            <attribute name="CommandLineArgument">
               <parameters>
                 <parameter name="" value="Opts.InMemDbCmd" />
+              </parameters>
+            </attribute>
+            <attribute name="JsonProperty">
+              <parameters>
+                <parameter name="" value="Opts.InMemDbJson" />
               </parameters>
             </attribute>
           </customAttributes>
@@ -111,9 +132,14 @@
         </attributeProperty>
         <attributeProperty name="DbPath" isRequired="false" isKey="false" isDefaultCollection="false" xmlName="path" isReadOnly="false" documentation="The path the db should be loaded/saved to." defaultValue="Opts.DbPathDefault">
           <customAttributes>
-            <attribute name="PropertyCommand">
+            <attribute name="CommandLineArgument">
               <parameters>
                 <parameter name="" value="Opts.DbPathCmd" />
+              </parameters>
+            </attribute>
+            <attribute name="JsonProperty">
+              <parameters>
+                <parameter name="" value="Opts.DbPathJson" />
               </parameters>
             </attribute>
           </customAttributes>
@@ -123,9 +149,14 @@
         </attributeProperty>
         <attributeProperty name="Logs" isRequired="false" isKey="false" isDefaultCollection="false" xmlName="logs" isReadOnly="false">
           <customAttributes>
-            <attribute name="PropertyCommand">
+            <attribute name="CommandLineArgument">
               <parameters>
                 <parameter name="" value="Opts.LogsCmd" />
+              </parameters>
+            </attribute>
+            <attribute name="JsonProperty">
+              <parameters>
+                <parameter name="" value="Opts.LogsJson" />
               </parameters>
             </attribute>
           </customAttributes>
@@ -135,9 +166,14 @@
         </attributeProperty>
         <attributeProperty name="SkipDbVerify" isRequired="false" isKey="false" isDefaultCollection="false" xmlName="skipDbVerify" isReadOnly="false" documentation="Bypasses the checking of file hashes of database during startup (allows for faster startup)." defaultValue="Opts.SkipDbVerifyDefault">
           <customAttributes>
-            <attribute name="PropertyCommand">
+            <attribute name="CommandLineArgument">
               <parameters>
                 <parameter name="" value="Opts.SkipDbVerifyCmd" />
+              </parameters>
+            </attribute>
+            <attribute name="JsonProperty">
+              <parameters>
+                <parameter name="" value="Opts.SkipDbVerifyJson" />
               </parameters>
             </attribute>
           </customAttributes>
@@ -147,9 +183,14 @@
         </attributeProperty>
         <attributeProperty name="CachedChunks" isRequired="false" isKey="false" isDefaultCollection="false" xmlName="cachedChunks" isReadOnly="false" documentation="The number of chunks to cache in unmanaged memory." defaultValue="Opts.CachedChunksDefault">
           <customAttributes>
-            <attribute name="PropertyCommand">
+            <attribute name="CommandLineArgument">
               <parameters>
                 <parameter name="" value="Opts.CachedChunksCmd" />
+              </parameters>
+            </attribute>
+            <attribute name="JsonProperty">
+              <parameters>
+                <parameter name="" value="Opts.CachedChunksJson" />
               </parameters>
             </attribute>
           </customAttributes>
@@ -159,9 +200,14 @@
         </attributeProperty>
         <attributeProperty name="ChunksCacheSize" isRequired="false" isKey="false" isDefaultCollection="false" xmlName="chunksCacheSize" isReadOnly="false" documentation="The amount of unmanaged memory to use for caching chunks." defaultValue="TFConsts.ChunksCacheSize">
           <customAttributes>
-            <attribute name="PropertyCommand">
+            <attribute name="CommandLineArgument">
               <parameters>
                 <parameter name="" value="Opts.ChunksCacheSizeCmd" />
+              </parameters>
+            </attribute>
+            <attribute name="JsonProperty">
+              <parameters>
+                <parameter name="" value="Opts.ChunksCacheSizeJson" />
               </parameters>
             </attribute>
           </customAttributes>
@@ -171,9 +217,14 @@
         </attributeProperty>
         <attributeProperty name="MinFlushDelay" isRequired="false" isKey="false" isDefaultCollection="false" xmlName="minFlushDelay" isReadOnly="false" documentation="The minimum flush delay in milliseconds." defaultValue="2d">
           <customAttributes>
-            <attribute name="PropertyCommand">
+            <attribute name="CommandLineArgument">
               <parameters>
                 <parameter name="" value="Opts.MinFlushDelayMsCmd" />
+              </parameters>
+            </attribute>
+            <attribute name="JsonProperty">
+              <parameters>
+                <parameter name="" value="Opts.MinFlushDelayMsJson" />
               </parameters>
             </attribute>
           </customAttributes>
@@ -183,9 +234,14 @@
         </attributeProperty>
         <attributeProperty name="StatsPeriod" isRequired="false" isKey="false" isDefaultCollection="false" xmlName="statsPeriod" isReadOnly="false" documentation="The number of seconds between statistics gathers." defaultValue="Opts.StatsPeriodDefault">
           <customAttributes>
-            <attribute name="PropertyCommand">
+            <attribute name="CommandLineArgument">
               <parameters>
                 <parameter name="" value="Opts.StatsPeriodCmd" />
+              </parameters>
+            </attribute>
+            <attribute name="JsonProperty">
+              <parameters>
+                <parameter name="" value="Opts.StatsPeriodJson" />
               </parameters>
             </attribute>
           </customAttributes>
@@ -195,9 +251,14 @@
         </attributeProperty>
         <attributeProperty name="NodePriority" isRequired="false" isKey="false" isDefaultCollection="false" xmlName="nodePriority" isReadOnly="false" documentation="The node priority used during master election" defaultValue="Opts.NodePriorityDefault">
           <customAttributes>
-            <attribute name="PropertyCommand">
+            <attribute name="CommandLineArgument">
               <parameters>
                 <parameter name="" value="Opts.NodePriorityCmd" />
+              </parameters>
+            </attribute>
+            <attribute name="JsonProperty">
+              <parameters>
+                <parameter name="" value="Opts.NodePriorityJson" />
               </parameters>
             </attribute>
           </customAttributes>
@@ -207,9 +268,14 @@
         </attributeProperty>
         <attributeProperty name="DisableScavengeMerge" isRequired="false" isKey="false" isDefaultCollection="false" xmlName="disableScavengeMerge" isReadOnly="false" documentation="Disables the merging of chunks when scavenge is running" defaultValue="Opts.DisableScavengeMergeDefault">
           <customAttributes>
-            <attribute name="PropertyCommand">
+            <attribute name="CommandLineArgument">
               <parameters>
                 <parameter name="" value="Opts.DisableScavengeMergeCmd" />
+              </parameters>
+            </attribute>
+            <attribute name="JsonProperty">
+              <parameters>
+                <parameter name="" value="Opts.DisableScavengeMergeJson" />
               </parameters>
             </attribute>
           </customAttributes>
@@ -223,9 +289,14 @@
       <attributeProperties>
         <attributeProperty name="Run" isRequired="false" isKey="false" isDefaultCollection="false" xmlName="run" isReadOnly="false" documentation="Enables the running of JavaScript projections." defaultValue="RunProjections.System">
           <customAttributes>
-            <attribute name="PropertyCommand">
+            <attribute name="CommandLineArgument">
               <parameters>
                 <parameter name="" value="Opts.RunProjectionsCmd" />
+              </parameters>
+            </attribute>
+            <attribute name="JsonProperty">
+              <parameters>
+                <parameter name="" value="Opts.RunProjectionsJson" />
               </parameters>
             </attribute>
           </customAttributes>
@@ -235,9 +306,14 @@
         </attributeProperty>
         <attributeProperty name="Threads" isRequired="false" isKey="false" isDefaultCollection="false" xmlName="threads" isReadOnly="false" documentation="The number of threads to use for projections." defaultValue="Opts.ProjectionThreadsDefault">
           <customAttributes>
-            <attribute name="PropertyCommand">
+            <attribute name="CommandLineArgument">
               <parameters>
                 <parameter name="" value="Opts.ProjectionThreadsCmd" />
+              </parameters>
+            </attribute>
+            <attribute name="JsonProperty">
+              <parameters>
+                <parameter name="" value="Opts.ProjectionThreadsJson" />
               </parameters>
             </attribute>
           </customAttributes>
@@ -254,9 +330,14 @@
             <converterMoniker name="/417279c0-6bf9-47b1-88b0-edbf9effd099/IPAddressTypeConverter" />
           </customTypeConverter>
           <customAttributes>
-            <attribute name="PropertyCommand">
+            <attribute name="CommandLineArgument">
               <parameters>
                 <parameter name="" value="Opts.IpCmd" />
+              </parameters>
+            </attribute>
+            <attribute name="JsonProperty">
+              <parameters>
+                <parameter name="" value="Opts.IpJson" />
               </parameters>
             </attribute>
           </customAttributes>
@@ -266,9 +347,14 @@
         </attributeProperty>
         <attributeProperty name="TcpPort" isRequired="false" isKey="false" isDefaultCollection="false" xmlName="tcpPort" isReadOnly="false" documentation="The port to run the TCP server on." defaultValue="Opts.TcpPortDefault">
           <customAttributes>
-            <attribute name="PropertyCommand">
+            <attribute name="CommandLineArgument">
               <parameters>
                 <parameter name="" value="Opts.TcpPortCmd" />
+              </parameters>
+            </attribute>
+            <attribute name="JsonProperty">
+              <parameters>
+                <parameter name="" value="Opts.TcpPortJson" />
               </parameters>
             </attribute>
           </customAttributes>
@@ -278,9 +364,14 @@
         </attributeProperty>
         <attributeProperty name="SecureTcpPort" isRequired="false" isKey="false" isDefaultCollection="false" xmlName="secureTcpPort" isReadOnly="false" defaultValue="Opts.SecureTcpPortDefault">
           <customAttributes>
-            <attribute name="PropertyCommand">
+            <attribute name="CommandLineArgument">
               <parameters>
                 <parameter name="" value="Opts.SecureTcpPortCmd" />
+              </parameters>
+            </attribute>
+            <attribute name="JsonProperty">
+              <parameters>
+                <parameter name="" value="Opts.SecureTcpPortJson" />
               </parameters>
             </attribute>
           </customAttributes>
@@ -290,9 +381,14 @@
         </attributeProperty>
         <attributeProperty name="HttpPort" isRequired="false" isKey="false" isDefaultCollection="false" xmlName="httpPort" isReadOnly="false" documentation="The port to run the HTTP server on." defaultValue="Opts.HttpPortDefault">
           <customAttributes>
-            <attribute name="PropertyCommand">
+            <attribute name="CommandLineArgument">
               <parameters>
                 <parameter name="" value="Opts.HttpPortCmd" />
+              </parameters>
+            </attribute>
+            <attribute name="JsonProperty">
+              <parameters>
+                <parameter name="" value="Opts.HttpPortJson" />
               </parameters>
             </attribute>
           </customAttributes>
@@ -304,11 +400,16 @@
     </configurationElement>
     <configurationElement name="ClusterElement">
       <attributeProperties>
-        <attributeProperty name="ClusterSize" isRequired="false" isKey="false" isDefaultCollection="false" xmlName="clusterSize" isReadOnly="false" documentation="The number of nodes in the cluster." defaultValue="Opts.ClusterSizeDefault">
+        <attributeProperty name="ClusterSize" isRequired="true" isKey="false" isDefaultCollection="false" xmlName="clusterSize" isReadOnly="false" documentation="The number of nodes in the cluster." defaultValue="Opts.ClusterSizeDefault">
           <customAttributes>
-            <attribute name="PropertyCommand">
+            <attribute name="CommandLineArgument">
               <parameters>
                 <parameter name="" value="Opts.ClusterSizeCmd" />
+              </parameters>
+            </attribute>
+            <attribute name="JsonProperty">
+              <parameters>
+                <parameter name="" value="Opts.ClusterSizeJson" />
               </parameters>
             </attribute>
           </customAttributes>
@@ -318,9 +419,14 @@
         </attributeProperty>
         <attributeProperty name="CommitCount" isRequired="false" isKey="false" isDefaultCollection="false" xmlName="commitCount" isReadOnly="false" documentation="The number of nodes which must acknowledge commits before acknowledging to a client." defaultValue="Opts.CommitCountDefault">
           <customAttributes>
-            <attribute name="PropertyCommand">
+            <attribute name="CommandLineArgument">
               <parameters>
                 <parameter name="" value="Opts.CommitCountCmd" />
+              </parameters>
+            </attribute>
+            <attribute name="JsonProperty">
+              <parameters>
+                <parameter name="" value="Opts.CommitCountJson" />
               </parameters>
             </attribute>
           </customAttributes>
@@ -330,9 +436,14 @@
         </attributeProperty>
         <attributeProperty name="PrepareCount" isRequired="false" isKey="false" isDefaultCollection="false" xmlName="prepareCount" isReadOnly="false" documentation="The number of nodes which must acknowledge prepares." defaultValue="Opts.PrepareCountDefault">
           <customAttributes>
-            <attribute name="PropertyCommand">
+            <attribute name="CommandLineArgument">
               <parameters>
                 <parameter name="" value="Opts.PrepareCountCmd" />
+              </parameters>
+            </attribute>
+            <attribute name="JsonProperty">
+              <parameters>
+                <parameter name="" value="Opts.PrepareCountJson" />
               </parameters>
             </attribute>
           </customAttributes>
@@ -381,14 +492,19 @@
     </configurationElement>
     <configurationElement name="ClusterIpElement">
       <attributeProperties>
-        <attributeProperty name="Internal" isRequired="false" isKey="false" isDefaultCollection="false" xmlName="internal" isReadOnly="false" documentation="Internal IP Address." typeConverter="Custom" defaultValue="&quot;127.0.0.1&quot;">
+        <attributeProperty name="Internal" isRequired="true" isKey="false" isDefaultCollection="false" xmlName="internal" isReadOnly="false" documentation="Internal IP Address." typeConverter="Custom" defaultValue="&quot;127.0.0.1&quot;">
           <customTypeConverter>
             <converterMoniker name="/417279c0-6bf9-47b1-88b0-edbf9effd099/IPAddressTypeConverter" />
           </customTypeConverter>
           <customAttributes>
-            <attribute name="PropertyCommand">
+            <attribute name="CommandLineArgument">
               <parameters>
                 <parameter name="" value="Opts.InternalIpCmd" />
+              </parameters>
+            </attribute>
+            <attribute name="JsonProperty">
+              <parameters>
+                <parameter name="" value="Opts.InternalIpJson" />
               </parameters>
             </attribute>
           </customAttributes>
@@ -396,14 +512,19 @@
             <externalTypeMoniker name="/417279c0-6bf9-47b1-88b0-edbf9effd099/IPAddress" />
           </type>
         </attributeProperty>
-        <attributeProperty name="External" isRequired="false" isKey="false" isDefaultCollection="false" xmlName="external" isReadOnly="false" documentation="External IP Address." typeConverter="Custom" defaultValue="&quot;127.0.0.1&quot;">
+        <attributeProperty name="External" isRequired="true" isKey="false" isDefaultCollection="false" xmlName="external" isReadOnly="false" documentation="External IP Address." typeConverter="Custom" defaultValue="&quot;127.0.0.1&quot;">
           <customTypeConverter>
             <converterMoniker name="/417279c0-6bf9-47b1-88b0-edbf9effd099/IPAddressTypeConverter" />
           </customTypeConverter>
           <customAttributes>
-            <attribute name="PropertyCommand">
+            <attribute name="CommandLineArgument">
               <parameters>
                 <parameter name="" value="Opts.ExternalIpCmd" />
+              </parameters>
+            </attribute>
+            <attribute name="JsonProperty">
+              <parameters>
+                <parameter name="" value="Opts.ExternalIpJson" />
               </parameters>
             </attribute>
           </customAttributes>
@@ -417,9 +538,14 @@
       <attributeProperties>
         <attributeProperty name="InternalPort" isRequired="false" isKey="false" isDefaultCollection="false" xmlName="internalPort" isReadOnly="false" documentation="Internal HTTP Port." defaultValue="Opts.InternalHttpPortDefault">
           <customAttributes>
-            <attribute name="PropertyCommand">
+            <attribute name="CommandLineArgument">
               <parameters>
                 <parameter name="" value="Opts.InternalHttpPortCmd" />
+              </parameters>
+            </attribute>
+            <attribute name="JsonProperty">
+              <parameters>
+                <parameter name="" value="Opts.InternalHttpPortJson" />
               </parameters>
             </attribute>
           </customAttributes>
@@ -429,9 +555,14 @@
         </attributeProperty>
         <attributeProperty name="ExternalPort" isRequired="false" isKey="false" isDefaultCollection="false" xmlName="externalPort" isReadOnly="false" documentation="External HTTP Port." defaultValue="Opts.ExternalHttpPortDefault">
           <customAttributes>
-            <attribute name="PropertyCommand">
+            <attribute name="CommandLineArgument">
               <parameters>
                 <parameter name="" value="Opts.ExternalHttpPortCmd" />
+              </parameters>
+            </attribute>
+            <attribute name="JsonProperty">
+              <parameters>
+                <parameter name="" value="Opts.ExternalHttpPortJson" />
               </parameters>
             </attribute>
           </customAttributes>
@@ -445,9 +576,14 @@
       <attributeProperties>
         <attributeProperty name="InternalPort" isRequired="false" isKey="false" isDefaultCollection="false" xmlName="internalPort" isReadOnly="false" documentation="Internal TCP Port." defaultValue="Opts.InternalTcpPortDefault">
           <customAttributes>
-            <attribute name="PropertyCommand">
+            <attribute name="CommandLineArgument">
               <parameters>
                 <parameter name="" value="Opts.InternalTcpPortCmd" />
+              </parameters>
+            </attribute>
+            <attribute name="JsonProperty">
+              <parameters>
+                <parameter name="" value="Opts.InternalTcpPortJson" />
               </parameters>
             </attribute>
           </customAttributes>
@@ -457,9 +593,14 @@
         </attributeProperty>
         <attributeProperty name="InternalSecurePort" isRequired="false" isKey="false" isDefaultCollection="false" xmlName="internalSecurePort" isReadOnly="false" documentation="Internal Secure TCP Port." defaultValue="Opts.InternalSecureTcpPortDefault">
           <customAttributes>
-            <attribute name="PropertyCommand">
+            <attribute name="CommandLineArgument">
               <parameters>
                 <parameter name="" value="Opts.InternalSecureTcpPortCmd" />
+              </parameters>
+            </attribute>
+            <attribute name="JsonProperty">
+              <parameters>
+                <parameter name="" value="Opts.InternalSecureTcpPortJson" />
               </parameters>
             </attribute>
           </customAttributes>
@@ -469,9 +610,14 @@
         </attributeProperty>
         <attributeProperty name="ExternalPort" isRequired="false" isKey="false" isDefaultCollection="false" xmlName="externalPort" isReadOnly="false" documentation="External TCP Port." defaultValue="Opts.ExternalTcpPortDefault">
           <customAttributes>
-            <attribute name="PropertyCommand">
+            <attribute name="CommandLineArgument">
               <parameters>
                 <parameter name="" value="Opts.ExternalTcpPortCmd" />
+              </parameters>
+            </attribute>
+            <attribute name="JsonProperty">
+              <parameters>
+                <parameter name="" value="Opts.ExternalTcpPortJson" />
               </parameters>
             </attribute>
           </customAttributes>
@@ -481,9 +627,14 @@
         </attributeProperty>
         <attributeProperty name="ExternalSecurePort" isRequired="false" isKey="false" isDefaultCollection="false" xmlName="externalSecurePort" isReadOnly="false" documentation="External Secure TCP Port." defaultValue="Opts.ExternalSecureTcpPortDefault">
           <customAttributes>
-            <attribute name="PropertyCommand">
+            <attribute name="CommandLineArgument">
               <parameters>
                 <parameter name="" value="Opts.ExternalSecureTcpPortCmd" />
+              </parameters>
+            </attribute>
+            <attribute name="JsonProperty">
+              <parameters>
+                <parameter name="" value="Opts.ExternalSecureTcpPortJson" />
               </parameters>
             </attribute>
           </customAttributes>
@@ -500,9 +651,14 @@
             <converterMoniker name="/417279c0-6bf9-47b1-88b0-edbf9effd099/IPAddressTypeConverter" />
           </customTypeConverter>
           <customAttributes>
-            <attribute name="PropertyCommand">
+            <attribute name="CommandLineArgument">
               <parameters>
                 <parameter name="" value="Opts.InternalManagerIpCmd" />
+              </parameters>
+            </attribute>
+            <attribute name="JsonProperty">
+              <parameters>
+                <parameter name="" value="Opts.InternalManagerIpJson" />
               </parameters>
             </attribute>
           </customAttributes>
@@ -515,9 +671,14 @@
             <converterMoniker name="/417279c0-6bf9-47b1-88b0-edbf9effd099/IPAddressTypeConverter" />
           </customTypeConverter>
           <customAttributes>
-            <attribute name="PropertyCommand">
+            <attribute name="CommandLineArgument">
               <parameters>
                 <parameter name="" value="Opts.ExternalManagerIpCmd" />
+              </parameters>
+            </attribute>
+            <attribute name="JsonProperty">
+              <parameters>
+                <parameter name="" value="Opts.ExternalManagerIpJson" />
               </parameters>
             </attribute>
           </customAttributes>
@@ -527,9 +688,14 @@
         </attributeProperty>
         <attributeProperty name="InternalHttpPort" isRequired="false" isKey="false" isDefaultCollection="false" xmlName="internalHttpPort" isReadOnly="false" defaultValue="Opts.InternalManagerHttpPortDefault">
           <customAttributes>
-            <attribute name="PropertyCommand">
+            <attribute name="CommandLineArgument">
               <parameters>
                 <parameter name="" value="Opts.InternalManagerHttpPortCmd" />
+              </parameters>
+            </attribute>
+            <attribute name="JsonProperty">
+              <parameters>
+                <parameter name="" value="Opts.InternalManagerHttpPortJson" />
               </parameters>
             </attribute>
           </customAttributes>
@@ -539,9 +705,14 @@
         </attributeProperty>
         <attributeProperty name="ExternalHttpPort" isRequired="false" isKey="false" isDefaultCollection="false" xmlName="externalHttpPort" isReadOnly="false" defaultValue="Opts.ExternalManagerHttpPortDefault">
           <customAttributes>
-            <attribute name="PropertyCommand">
+            <attribute name="CommandLineArgument">
               <parameters>
                 <parameter name="" value="Opts.ExternalManagerHttpPortCmd" />
+              </parameters>
+            </attribute>
+            <attribute name="JsonProperty">
+              <parameters>
+                <parameter name="" value="Opts.ExternalManagerHttpPortJson" />
               </parameters>
             </attribute>
           </customAttributes>
@@ -555,9 +726,14 @@
       <attributeProperties>
         <attributeProperty name="UseInternalSsl" isRequired="false" isKey="false" isDefaultCollection="false" xmlName="useInternalSsl" isReadOnly="false" documentation="Whether to use secure internal communication." defaultValue="Opts.UseInternalSslDefault">
           <customAttributes>
-            <attribute name="PropertyCommand">
+            <attribute name="CommandLineArgument">
               <parameters>
                 <parameter name="" value="Opts.UseInternalSslCmd" />
+              </parameters>
+            </attribute>
+            <attribute name="JsonProperty">
+              <parameters>
+                <parameter name="" value="Opts.UseInternalSslJson" />
               </parameters>
             </attribute>
           </customAttributes>
@@ -567,9 +743,14 @@
         </attributeProperty>
         <attributeProperty name="SslTargetHost" isRequired="false" isKey="false" isDefaultCollection="false" xmlName="sslTargetHost" isReadOnly="false" documentation="Target host of server's SSL certificate." defaultValue="Opts.SslTargetHostDefault">
           <customAttributes>
-            <attribute name="PropertyCommand">
+            <attribute name="CommandLineArgument">
               <parameters>
                 <parameter name="" value="Opts.SslTargetHostCmd" />
+              </parameters>
+            </attribute>
+            <attribute name="JsonProperty">
+              <parameters>
+                <parameter name="" value="Opts.SslTargetHostJson" />
               </parameters>
             </attribute>
           </customAttributes>
@@ -579,9 +760,14 @@
         </attributeProperty>
         <attributeProperty name="SslValidateServer" isRequired="false" isKey="false" isDefaultCollection="false" xmlName="sslValidateServer" isReadOnly="false" defaultValue="Opts.SslValidateServerDefault">
           <customAttributes>
-            <attribute name="PropertyCommand">
+            <attribute name="CommandLineArgument">
               <parameters>
                 <parameter name="" value="Opts.SslValidateServerCmd" />
+              </parameters>
+            </attribute>
+            <attribute name="JsonProperty">
+              <parameters>
+                <parameter name="" value="Opts.SslValidateServerJson" />
               </parameters>
             </attribute>
           </customAttributes>
@@ -593,11 +779,16 @@
     </configurationElement>
     <configurationElement name="ClusterDnsElement">
       <attributeProperties>
-        <attributeProperty name="DiscoverViaDns" isRequired="false" isKey="false" isDefaultCollection="false" xmlName="discoverViaDns" isReadOnly="false" documentation="Whether to use DNS lookup to discover other cluster nodes." defaultValue="Opts.DiscoverViaDnsDefault">
+        <attributeProperty name="DiscoverViaDns" isRequired="true" isKey="false" isDefaultCollection="false" xmlName="discoverViaDns" isReadOnly="false" documentation="Whether to use DNS lookup to discover other cluster nodes." defaultValue="Opts.DiscoverViaDnsDefault">
           <customAttributes>
-            <attribute name="PropertyCommand">
+            <attribute name="CommandLineArgument">
               <parameters>
                 <parameter name="" value="Opts.DiscoverViaDnsCmd" />
+              </parameters>
+            </attribute>
+            <attribute name="JsonProperty">
+              <parameters>
+                <parameter name="" value="Opts.DiscoverViaDnsJson" />
               </parameters>
             </attribute>
           </customAttributes>
@@ -607,9 +798,14 @@
         </attributeProperty>
         <attributeProperty name="ClusterDns" isRequired="false" isKey="false" isDefaultCollection="false" xmlName="clusterDns" isReadOnly="false" documentation="DNS name from which other nodes can be discovered." defaultValue="Opts.ClusterDnsDefault">
           <customAttributes>
-            <attribute name="PropertyCommand">
+            <attribute name="CommandLineArgument">
               <parameters>
                 <parameter name="" value="Opts.ClusterDnsCmd" />
+              </parameters>
+            </attribute>
+            <attribute name="JsonProperty">
+              <parameters>
+                <parameter name="" value="Opts.ClusterDnsJson" />
               </parameters>
             </attribute>
           </customAttributes>
@@ -623,9 +819,14 @@
       <attributeProperties>
         <attributeProperty name="Port" isRequired="false" isKey="false" isDefaultCollection="false" xmlName="port" isReadOnly="false" documentation="The port on which cluster nodes' managers are running." defaultValue="Opts.ClusterGossipPortDefault">
           <customAttributes>
-            <attribute name="PropertyCommand">
+            <attribute name="CommandLineArgument">
               <parameters>
                 <parameter name="" value="Opts.ClusterGossipPortCmd" />
+              </parameters>
+            </attribute>
+            <attribute name="JsonProperty">
+              <parameters>
+                <parameter name="" value="Opts.ClusterGossipPortJson" />
               </parameters>
             </attribute>
           </customAttributes>
@@ -649,9 +850,14 @@
             <converterMoniker name="/417279c0-6bf9-47b1-88b0-edbf9effd099/IPEndPointTypeConverter" />
           </customTypeConverter>
           <customAttributes>
-            <attribute name="PropertyCommand">
+            <attribute name="CommandLineArgument">
               <parameters>
                 <parameter name="" value="Opts.GossipSeedCmd" />
+              </parameters>
+            </attribute>
+            <attribute name="JsonProperty">
+              <parameters>
+                <parameter name="" value="Opts.GossipSeedJson" />
               </parameters>
             </attribute>
           </customAttributes>

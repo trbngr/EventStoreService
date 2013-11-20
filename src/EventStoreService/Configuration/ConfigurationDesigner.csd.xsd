@@ -73,6 +73,16 @@
 				<xs:documentation>The path to the EventStore binaries.</xs:documentation>
 			</xs:annotation>
 		</xs:attribute>
+		<xs:attribute name="debug" use="optional" type="xs:boolean">
+			<xs:annotation>
+				<xs:documentation>The Debug.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="arguments" use="optional" type="tns:ArgumentKind">
+			<xs:annotation>
+				<xs:documentation>The Arguments.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
 	</xs:complexType>
 	<xs:complexType name="EventStoreService.Configuration.DatabaseElementCT">
 		<xs:attribute name="inMemory" use="optional" type="xs:boolean">
@@ -198,7 +208,7 @@
 				</xs:annotation>
 			</xs:element>
 		</xs:choice>
-		<xs:attribute name="clusterSize" use="optional" type="xs:int">
+		<xs:attribute name="clusterSize" use="required" type="xs:int">
 			<xs:annotation>
 				<xs:documentation>The number of nodes in the cluster.</xs:documentation>
 			</xs:annotation>
@@ -215,12 +225,12 @@
 		</xs:attribute>
 	</xs:complexType>
 	<xs:complexType name="EventStoreService.Configuration.ClusterIpElementCT">
-		<xs:attribute name="internal" use="optional">
+		<xs:attribute name="internal" use="required">
 			<xs:annotation>
 				<xs:documentation>Internal IP Address.</xs:documentation>
 			</xs:annotation>
 		</xs:attribute>
-		<xs:attribute name="external" use="optional">
+		<xs:attribute name="external" use="required">
 			<xs:annotation>
 				<xs:documentation>External IP Address.</xs:documentation>
 			</xs:annotation>
@@ -300,7 +310,7 @@
 		</xs:attribute>
 	</xs:complexType>
 	<xs:complexType name="EventStoreService.Configuration.ClusterDnsElementCT">
-		<xs:attribute name="discoverViaDns" use="optional" type="xs:boolean">
+		<xs:attribute name="discoverViaDns" use="required" type="xs:boolean">
 			<xs:annotation>
 				<xs:documentation>Whether to use DNS lookup to discover other cluster nodes.</xs:documentation>
 			</xs:annotation>
@@ -354,6 +364,23 @@
 			<xs:enumeration value="Cluster">
 				<xs:annotation>
 					<xs:documentation>Cluster.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ArgumentKind">
+		<xs:annotation>
+			<xs:documentation>ArgumentKind.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Json">
+				<xs:annotation>
+					<xs:documentation>Json.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CommandLine">
+				<xs:annotation>
+					<xs:documentation>CommandLine.</xs:documentation>
 				</xs:annotation>
 			</xs:enumeration>
 		</xs:restriction>

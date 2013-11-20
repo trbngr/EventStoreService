@@ -34,6 +34,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="log4net">
+      <HintPath>..\packages\log4net.2.0.2\lib\net40-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.5.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -42,26 +48,51 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="Topshelf">
-      <HintPath>..\packages\TopShelf.3.1.0\lib\net40-full\Topshelf.dll</HintPath>
+    <Reference Include="Topshelf, Version=3.1.118.0, Culture=neutral, PublicKeyToken=b800c4cfcdeea87b, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Topshelf.3.1.2\lib\net40-full\Topshelf.dll</HintPath>
+    </Reference>
+    <Reference Include="Topshelf.Log4Net">
+      <HintPath>..\packages\Topshelf.Log4Net.3.1.2\lib\net40-full\Topshelf.Log4Net.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Configuration\ChunkFooter.cs" />
-    <Compile Include="Configuration\ChunkHeader.cs" />
+    <Compile Include="Configuration\Attributes\JsonPropertyAttribute.cs" />
+    <Compile Include="Configuration\ChunkFooter.cs">
+      <DependentUpon>Opts.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Configuration\ChunkHeader.cs">
+      <DependentUpon>Opts.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Configuration\Enums.cs" />
     <Compile Include="Configuration\EventStoreElementExtensions.cs" />
     <Compile Include="Configuration\IPAddressTypeConverter.cs" />
+    <Compile Include="Configuration\IPEndPointTypeConverter.cs" />
     <Compile Include="Configuration\Opts.cs" />
     <Compile Include="Configuration\ConfigurationDesigner.csd.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ConfigurationDesigner.csd</DependentUpon>
     </Compile>
-    <Compile Include="Configuration\RunMode.cs" />
-    <Compile Include="Configuration\PropertyCommand.cs" />
-    <Compile Include="Configuration\RunProjections.cs" />
-    <Compile Include="Configuration\TFConsts.cs" />
-    <Compile Include="EventStoreProcessWrapper.cs" />
+    <Compile Include="Configuration\Attributes\PropertyCommand.cs" />
+    <Compile Include="Configuration\Serialization\IPAddressConverter.cs" />
+    <Compile Include="Configuration\Serialization\IPEndPointConverter.cs" />
+    <Compile Include="Configuration\Serialization\ToStringConverter.cs" />
+    <Compile Include="Configuration\Strategy\Argument.cs" />
+    <Compile Include="Configuration\Strategy\CommandLineStrategy.cs" />
+    <Compile Include="Configuration\Strategy\InstanceStrategy.cs" />
+    <Compile Include="Configuration\Strategy\JsonConfigStrategy.cs" />
+    <Compile Include="Configuration\TFConsts.cs">
+      <DependentUpon>Opts.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DebugProcessWrapper.cs">
+      <DependentUpon>ProcessWrapper.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EventStoreInstanceInfo.cs" />
+    <Compile Include="DefaultProcessWrapper.cs">
+      <DependentUpon>ProcessWrapper.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ProcessWrapper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -83,10 +114,21 @@
       <DependentUpon>ConfigurationDesigner.csd</DependentUpon>
       <SubType>Designer</SubType>
     </None>
+    <None Include="Log4Net.config">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <DependentUpon>App.config</DependentUpon>
+    </None>
+    <None Include="uninstall.bat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <DependentUpon>install.bat</DependentUpon>
+    </None>
     <None Include="install.bat">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <DependentUpon>App.config</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

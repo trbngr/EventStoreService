@@ -300,6 +300,58 @@ namespace EventStoreService.Configuration
         }
         #endregion
         
+        #region Debug Property
+        /// <summary>
+        /// The XML name of the <see cref="Debug"/> property.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("ConfigurationSectionDesigner.CsdFileGenerator", "2.0.1.0")]
+        internal const string DebugPropertyName = "debug";
+        
+        /// <summary>
+        /// Gets or sets the Debug.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("ConfigurationSectionDesigner.CsdFileGenerator", "2.0.1.0")]
+        [global::System.ComponentModel.DescriptionAttribute("The Debug.")]
+        [global::System.Configuration.ConfigurationPropertyAttribute(global::EventStoreService.Configuration.EventStoreElement.DebugPropertyName, IsRequired=false, IsKey=false, IsDefaultCollection=false, DefaultValue=false)]
+        public virtual bool Debug
+        {
+            get
+            {
+                return ((bool)(base[global::EventStoreService.Configuration.EventStoreElement.DebugPropertyName]));
+            }
+            set
+            {
+                base[global::EventStoreService.Configuration.EventStoreElement.DebugPropertyName] = value;
+            }
+        }
+        #endregion
+        
+        #region Arguments Property
+        /// <summary>
+        /// The XML name of the <see cref="Arguments"/> property.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("ConfigurationSectionDesigner.CsdFileGenerator", "2.0.1.0")]
+        internal const string ArgumentsPropertyName = "arguments";
+        
+        /// <summary>
+        /// Gets or sets the Arguments.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("ConfigurationSectionDesigner.CsdFileGenerator", "2.0.1.0")]
+        [global::System.ComponentModel.DescriptionAttribute("The Arguments.")]
+        [global::System.Configuration.ConfigurationPropertyAttribute(global::EventStoreService.Configuration.EventStoreElement.ArgumentsPropertyName, IsRequired=false, IsKey=false, IsDefaultCollection=false, DefaultValue=ArgumentKind.Json)]
+        public virtual global::EventStoreService.Configuration.ArgumentKind Arguments
+        {
+            get
+            {
+                return ((global::EventStoreService.Configuration.ArgumentKind)(base[global::EventStoreService.Configuration.EventStoreElement.ArgumentsPropertyName]));
+            }
+            set
+            {
+                base[global::EventStoreService.Configuration.EventStoreElement.ArgumentsPropertyName] = value;
+            }
+        }
+        #endregion
+        
         #region Database Property
         /// <summary>
         /// The XML name of the <see cref="Database"/> property.
@@ -437,7 +489,8 @@ namespace EventStoreService.Configuration
         /// Gets or sets keep everything in memory, no directories or files are created.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("ConfigurationSectionDesigner.CsdFileGenerator", "2.0.1.0")]
-        [global::PropertyCommand(Opts.InMemDbCmd)]
+        [global::CommandLineArgument(Opts.InMemDbCmd)]
+        [global::JsonProperty(Opts.InMemDbJson)]
         [global::System.ComponentModel.DescriptionAttribute("Keep everything in memory, no directories or files are created.")]
         [global::System.ComponentModel.BrowsableAttribute(false)]
         [global::System.Configuration.ConfigurationPropertyAttribute(global::EventStoreService.Configuration.DatabaseElement.InMemoryPropertyName, IsRequired=false, IsKey=false, IsDefaultCollection=false, DefaultValue=true)]
@@ -465,7 +518,8 @@ namespace EventStoreService.Configuration
         /// Gets or sets the path the db should be loaded/saved to.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("ConfigurationSectionDesigner.CsdFileGenerator", "2.0.1.0")]
-        [global::PropertyCommand(Opts.DbPathCmd)]
+        [global::CommandLineArgument(Opts.DbPathCmd)]
+        [global::JsonProperty(Opts.DbPathJson)]
         [global::System.ComponentModel.DescriptionAttribute("The path the db should be loaded/saved to.")]
         [global::System.Configuration.ConfigurationPropertyAttribute(global::EventStoreService.Configuration.DatabaseElement.DbPathPropertyName, IsRequired=false, IsKey=false, IsDefaultCollection=false, DefaultValue=Opts.DbPathDefault)]
         public virtual string DbPath
@@ -492,7 +546,8 @@ namespace EventStoreService.Configuration
         /// Gets or sets the Logs.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("ConfigurationSectionDesigner.CsdFileGenerator", "2.0.1.0")]
-        [global::PropertyCommand(Opts.LogsCmd)]
+        [global::CommandLineArgument(Opts.LogsCmd)]
+        [global::JsonProperty(Opts.LogsJson)]
         [global::System.ComponentModel.DescriptionAttribute("The Logs.")]
         [global::System.Configuration.ConfigurationPropertyAttribute(global::EventStoreService.Configuration.DatabaseElement.LogsPropertyName, IsRequired=false, IsKey=false, IsDefaultCollection=false)]
         public virtual string Logs
@@ -519,7 +574,8 @@ namespace EventStoreService.Configuration
         /// Gets or sets bypasses the checking of file hashes of database during startup (allows for faster startup).
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("ConfigurationSectionDesigner.CsdFileGenerator", "2.0.1.0")]
-        [global::PropertyCommand(Opts.SkipDbVerifyCmd)]
+        [global::CommandLineArgument(Opts.SkipDbVerifyCmd)]
+        [global::JsonProperty(Opts.SkipDbVerifyJson)]
         [global::System.ComponentModel.DescriptionAttribute("Bypasses the checking of file hashes of database during startup (allows for faste" +
             "r startup).")]
         [global::System.Configuration.ConfigurationPropertyAttribute(global::EventStoreService.Configuration.DatabaseElement.SkipDbVerifyPropertyName, IsRequired=false, IsKey=false, IsDefaultCollection=false, DefaultValue=Opts.SkipDbVerifyDefault)]
@@ -547,7 +603,8 @@ namespace EventStoreService.Configuration
         /// Gets or sets the number of chunks to cache in unmanaged memory.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("ConfigurationSectionDesigner.CsdFileGenerator", "2.0.1.0")]
-        [global::PropertyCommand(Opts.CachedChunksCmd)]
+        [global::CommandLineArgument(Opts.CachedChunksCmd)]
+        [global::JsonProperty(Opts.CachedChunksJson)]
         [global::System.ComponentModel.DescriptionAttribute("The number of chunks to cache in unmanaged memory.")]
         [global::System.Configuration.ConfigurationPropertyAttribute(global::EventStoreService.Configuration.DatabaseElement.CachedChunksPropertyName, IsRequired=false, IsKey=false, IsDefaultCollection=false, DefaultValue=Opts.CachedChunksDefault)]
         public virtual int CachedChunks
@@ -574,7 +631,8 @@ namespace EventStoreService.Configuration
         /// Gets or sets the amount of unmanaged memory to use for caching chunks.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("ConfigurationSectionDesigner.CsdFileGenerator", "2.0.1.0")]
-        [global::PropertyCommand(Opts.ChunksCacheSizeCmd)]
+        [global::CommandLineArgument(Opts.ChunksCacheSizeCmd)]
+        [global::JsonProperty(Opts.ChunksCacheSizeJson)]
         [global::System.ComponentModel.DescriptionAttribute("The amount of unmanaged memory to use for caching chunks.")]
         [global::System.Configuration.ConfigurationPropertyAttribute(global::EventStoreService.Configuration.DatabaseElement.ChunksCacheSizePropertyName, IsRequired=false, IsKey=false, IsDefaultCollection=false, DefaultValue=TFConsts.ChunksCacheSize)]
         public virtual int ChunksCacheSize
@@ -601,7 +659,8 @@ namespace EventStoreService.Configuration
         /// Gets or sets the minimum flush delay in milliseconds.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("ConfigurationSectionDesigner.CsdFileGenerator", "2.0.1.0")]
-        [global::PropertyCommand(Opts.MinFlushDelayMsCmd)]
+        [global::CommandLineArgument(Opts.MinFlushDelayMsCmd)]
+        [global::JsonProperty(Opts.MinFlushDelayMsJson)]
         [global::System.ComponentModel.DescriptionAttribute("The minimum flush delay in milliseconds.")]
         [global::System.Configuration.ConfigurationPropertyAttribute(global::EventStoreService.Configuration.DatabaseElement.MinFlushDelayPropertyName, IsRequired=false, IsKey=false, IsDefaultCollection=false, DefaultValue=2d)]
         public virtual double MinFlushDelay
@@ -628,7 +687,8 @@ namespace EventStoreService.Configuration
         /// Gets or sets the number of seconds between statistics gathers.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("ConfigurationSectionDesigner.CsdFileGenerator", "2.0.1.0")]
-        [global::PropertyCommand(Opts.StatsPeriodCmd)]
+        [global::CommandLineArgument(Opts.StatsPeriodCmd)]
+        [global::JsonProperty(Opts.StatsPeriodJson)]
         [global::System.ComponentModel.DescriptionAttribute("The number of seconds between statistics gathers.")]
         [global::System.Configuration.ConfigurationPropertyAttribute(global::EventStoreService.Configuration.DatabaseElement.StatsPeriodPropertyName, IsRequired=false, IsKey=false, IsDefaultCollection=false, DefaultValue=Opts.StatsPeriodDefault)]
         public virtual int StatsPeriod
@@ -655,7 +715,8 @@ namespace EventStoreService.Configuration
         /// Gets or sets the node priority used during master election
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("ConfigurationSectionDesigner.CsdFileGenerator", "2.0.1.0")]
-        [global::PropertyCommand(Opts.NodePriorityCmd)]
+        [global::CommandLineArgument(Opts.NodePriorityCmd)]
+        [global::JsonProperty(Opts.NodePriorityJson)]
         [global::System.ComponentModel.DescriptionAttribute("The node priority used during master election")]
         [global::System.Configuration.ConfigurationPropertyAttribute(global::EventStoreService.Configuration.DatabaseElement.NodePriorityPropertyName, IsRequired=false, IsKey=false, IsDefaultCollection=false, DefaultValue=Opts.NodePriorityDefault)]
         public virtual int NodePriority
@@ -682,7 +743,8 @@ namespace EventStoreService.Configuration
         /// Gets or sets disables the merging of chunks when scavenge is running
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("ConfigurationSectionDesigner.CsdFileGenerator", "2.0.1.0")]
-        [global::PropertyCommand(Opts.DisableScavengeMergeCmd)]
+        [global::CommandLineArgument(Opts.DisableScavengeMergeCmd)]
+        [global::JsonProperty(Opts.DisableScavengeMergeJson)]
         [global::System.ComponentModel.DescriptionAttribute("Disables the merging of chunks when scavenge is running")]
         [global::System.Configuration.ConfigurationPropertyAttribute(global::EventStoreService.Configuration.DatabaseElement.DisableScavengeMergePropertyName, IsRequired=false, IsKey=false, IsDefaultCollection=false, DefaultValue=Opts.DisableScavengeMergeDefault)]
         public virtual bool DisableScavengeMerge
@@ -731,7 +793,8 @@ namespace EventStoreService.Configuration
         /// Gets or sets enables the running of JavaScript projections.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("ConfigurationSectionDesigner.CsdFileGenerator", "2.0.1.0")]
-        [global::PropertyCommand(Opts.RunProjectionsCmd)]
+        [global::CommandLineArgument(Opts.RunProjectionsCmd)]
+        [global::JsonProperty(Opts.RunProjectionsJson)]
         [global::System.ComponentModel.DescriptionAttribute("Enables the running of JavaScript projections.")]
         [global::System.Configuration.ConfigurationPropertyAttribute(global::EventStoreService.Configuration.ProjectionsElement.RunPropertyName, IsRequired=false, IsKey=false, IsDefaultCollection=false, DefaultValue=RunProjections.System)]
         public virtual global::EventStoreService.Configuration.RunProjections Run
@@ -758,7 +821,8 @@ namespace EventStoreService.Configuration
         /// Gets or sets the number of threads to use for projections.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("ConfigurationSectionDesigner.CsdFileGenerator", "2.0.1.0")]
-        [global::PropertyCommand(Opts.ProjectionThreadsCmd)]
+        [global::CommandLineArgument(Opts.ProjectionThreadsCmd)]
+        [global::JsonProperty(Opts.ProjectionThreadsJson)]
         [global::System.ComponentModel.DescriptionAttribute("The number of threads to use for projections.")]
         [global::System.Configuration.ConfigurationPropertyAttribute(global::EventStoreService.Configuration.ProjectionsElement.ThreadsPropertyName, IsRequired=false, IsKey=false, IsDefaultCollection=false, DefaultValue=Opts.ProjectionThreadsDefault)]
         public virtual int Threads
@@ -807,7 +871,8 @@ namespace EventStoreService.Configuration
         /// Gets or sets the IP address to bind to.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("ConfigurationSectionDesigner.CsdFileGenerator", "2.0.1.0")]
-        [global::PropertyCommand(Opts.IpCmd)]
+        [global::CommandLineArgument(Opts.IpCmd)]
+        [global::JsonProperty(Opts.IpJson)]
         [global::System.ComponentModel.DescriptionAttribute("The IP address to bind to.")]
         [global::System.ComponentModel.TypeConverter(typeof(global::EventStoreService.Configuration.IPAddressTypeConverter))]
         [global::System.Configuration.ConfigurationPropertyAttribute(global::EventStoreService.Configuration.SingleNodeElement.IpPropertyName, IsRequired=false, IsKey=false, IsDefaultCollection=false, DefaultValue="127.0.0.1")]
@@ -835,7 +900,8 @@ namespace EventStoreService.Configuration
         /// Gets or sets the port to run the TCP server on.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("ConfigurationSectionDesigner.CsdFileGenerator", "2.0.1.0")]
-        [global::PropertyCommand(Opts.TcpPortCmd)]
+        [global::CommandLineArgument(Opts.TcpPortCmd)]
+        [global::JsonProperty(Opts.TcpPortJson)]
         [global::System.ComponentModel.DescriptionAttribute("The port to run the TCP server on.")]
         [global::System.Configuration.ConfigurationPropertyAttribute(global::EventStoreService.Configuration.SingleNodeElement.TcpPortPropertyName, IsRequired=false, IsKey=false, IsDefaultCollection=false, DefaultValue=Opts.TcpPortDefault)]
         public virtual int TcpPort
@@ -862,7 +928,8 @@ namespace EventStoreService.Configuration
         /// Gets or sets the SecureTcpPort.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("ConfigurationSectionDesigner.CsdFileGenerator", "2.0.1.0")]
-        [global::PropertyCommand(Opts.SecureTcpPortCmd)]
+        [global::CommandLineArgument(Opts.SecureTcpPortCmd)]
+        [global::JsonProperty(Opts.SecureTcpPortJson)]
         [global::System.ComponentModel.DescriptionAttribute("The SecureTcpPort.")]
         [global::System.Configuration.ConfigurationPropertyAttribute(global::EventStoreService.Configuration.SingleNodeElement.SecureTcpPortPropertyName, IsRequired=false, IsKey=false, IsDefaultCollection=false, DefaultValue=Opts.SecureTcpPortDefault)]
         public virtual int SecureTcpPort
@@ -889,7 +956,8 @@ namespace EventStoreService.Configuration
         /// Gets or sets the port to run the HTTP server on.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("ConfigurationSectionDesigner.CsdFileGenerator", "2.0.1.0")]
-        [global::PropertyCommand(Opts.HttpPortCmd)]
+        [global::CommandLineArgument(Opts.HttpPortCmd)]
+        [global::JsonProperty(Opts.HttpPortJson)]
         [global::System.ComponentModel.DescriptionAttribute("The port to run the HTTP server on.")]
         [global::System.Configuration.ConfigurationPropertyAttribute(global::EventStoreService.Configuration.SingleNodeElement.HttpPortPropertyName, IsRequired=false, IsKey=false, IsDefaultCollection=false, DefaultValue=Opts.HttpPortDefault)]
         public virtual int HttpPort
@@ -938,9 +1006,10 @@ namespace EventStoreService.Configuration
         /// Gets or sets the number of nodes in the cluster.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("ConfigurationSectionDesigner.CsdFileGenerator", "2.0.1.0")]
-        [global::PropertyCommand(Opts.ClusterSizeCmd)]
+        [global::CommandLineArgument(Opts.ClusterSizeCmd)]
+        [global::JsonProperty(Opts.ClusterSizeJson)]
         [global::System.ComponentModel.DescriptionAttribute("The number of nodes in the cluster.")]
-        [global::System.Configuration.ConfigurationPropertyAttribute(global::EventStoreService.Configuration.ClusterElement.ClusterSizePropertyName, IsRequired=false, IsKey=false, IsDefaultCollection=false, DefaultValue=Opts.ClusterSizeDefault)]
+        [global::System.Configuration.ConfigurationPropertyAttribute(global::EventStoreService.Configuration.ClusterElement.ClusterSizePropertyName, IsRequired=true, IsKey=false, IsDefaultCollection=false, DefaultValue=Opts.ClusterSizeDefault)]
         public virtual int ClusterSize
         {
             get
@@ -965,7 +1034,8 @@ namespace EventStoreService.Configuration
         /// Gets or sets the number of nodes which must acknowledge commits before acknowledging to a client.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("ConfigurationSectionDesigner.CsdFileGenerator", "2.0.1.0")]
-        [global::PropertyCommand(Opts.CommitCountCmd)]
+        [global::CommandLineArgument(Opts.CommitCountCmd)]
+        [global::JsonProperty(Opts.CommitCountJson)]
         [global::System.ComponentModel.DescriptionAttribute("The number of nodes which must acknowledge commits before acknowledging to a clie" +
             "nt.")]
         [global::System.Configuration.ConfigurationPropertyAttribute(global::EventStoreService.Configuration.ClusterElement.CommitCountPropertyName, IsRequired=false, IsKey=false, IsDefaultCollection=false, DefaultValue=Opts.CommitCountDefault)]
@@ -993,7 +1063,8 @@ namespace EventStoreService.Configuration
         /// Gets or sets the number of nodes which must acknowledge prepares.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("ConfigurationSectionDesigner.CsdFileGenerator", "2.0.1.0")]
-        [global::PropertyCommand(Opts.PrepareCountCmd)]
+        [global::CommandLineArgument(Opts.PrepareCountCmd)]
+        [global::JsonProperty(Opts.PrepareCountJson)]
         [global::System.ComponentModel.DescriptionAttribute("The number of nodes which must acknowledge prepares.")]
         [global::System.Configuration.ConfigurationPropertyAttribute(global::EventStoreService.Configuration.ClusterElement.PrepareCountPropertyName, IsRequired=false, IsKey=false, IsDefaultCollection=false, DefaultValue=Opts.PrepareCountDefault)]
         public virtual int PrepareCount
@@ -1224,10 +1295,11 @@ namespace EventStoreService.Configuration
         /// Gets or sets internal IP Address.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("ConfigurationSectionDesigner.CsdFileGenerator", "2.0.1.0")]
-        [global::PropertyCommand(Opts.InternalIpCmd)]
+        [global::CommandLineArgument(Opts.InternalIpCmd)]
+        [global::JsonProperty(Opts.InternalIpJson)]
         [global::System.ComponentModel.DescriptionAttribute("Internal IP Address.")]
         [global::System.ComponentModel.TypeConverter(typeof(global::EventStoreService.Configuration.IPAddressTypeConverter))]
-        [global::System.Configuration.ConfigurationPropertyAttribute(global::EventStoreService.Configuration.ClusterIpElement.InternalPropertyName, IsRequired=false, IsKey=false, IsDefaultCollection=false, DefaultValue="127.0.0.1")]
+        [global::System.Configuration.ConfigurationPropertyAttribute(global::EventStoreService.Configuration.ClusterIpElement.InternalPropertyName, IsRequired=true, IsKey=false, IsDefaultCollection=false, DefaultValue="127.0.0.1")]
         public virtual global::System.Net.IPAddress Internal
         {
             get
@@ -1252,10 +1324,11 @@ namespace EventStoreService.Configuration
         /// Gets or sets external IP Address.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("ConfigurationSectionDesigner.CsdFileGenerator", "2.0.1.0")]
-        [global::PropertyCommand(Opts.ExternalIpCmd)]
+        [global::CommandLineArgument(Opts.ExternalIpCmd)]
+        [global::JsonProperty(Opts.ExternalIpJson)]
         [global::System.ComponentModel.DescriptionAttribute("External IP Address.")]
         [global::System.ComponentModel.TypeConverter(typeof(global::EventStoreService.Configuration.IPAddressTypeConverter))]
-        [global::System.Configuration.ConfigurationPropertyAttribute(global::EventStoreService.Configuration.ClusterIpElement.ExternalPropertyName, IsRequired=false, IsKey=false, IsDefaultCollection=false, DefaultValue="127.0.0.1")]
+        [global::System.Configuration.ConfigurationPropertyAttribute(global::EventStoreService.Configuration.ClusterIpElement.ExternalPropertyName, IsRequired=true, IsKey=false, IsDefaultCollection=false, DefaultValue="127.0.0.1")]
         public virtual global::System.Net.IPAddress External
         {
             get
@@ -1302,7 +1375,8 @@ namespace EventStoreService.Configuration
         /// Gets or sets internal HTTP Port.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("ConfigurationSectionDesigner.CsdFileGenerator", "2.0.1.0")]
-        [global::PropertyCommand(Opts.InternalHttpPortCmd)]
+        [global::CommandLineArgument(Opts.InternalHttpPortCmd)]
+        [global::JsonProperty(Opts.InternalHttpPortJson)]
         [global::System.ComponentModel.DescriptionAttribute("Internal HTTP Port.")]
         [global::System.Configuration.ConfigurationPropertyAttribute(global::EventStoreService.Configuration.ClusterHttpElement.InternalPortPropertyName, IsRequired=false, IsKey=false, IsDefaultCollection=false, DefaultValue=Opts.InternalHttpPortDefault)]
         public virtual int InternalPort
@@ -1329,7 +1403,8 @@ namespace EventStoreService.Configuration
         /// Gets or sets external HTTP Port.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("ConfigurationSectionDesigner.CsdFileGenerator", "2.0.1.0")]
-        [global::PropertyCommand(Opts.ExternalHttpPortCmd)]
+        [global::CommandLineArgument(Opts.ExternalHttpPortCmd)]
+        [global::JsonProperty(Opts.ExternalHttpPortJson)]
         [global::System.ComponentModel.DescriptionAttribute("External HTTP Port.")]
         [global::System.Configuration.ConfigurationPropertyAttribute(global::EventStoreService.Configuration.ClusterHttpElement.ExternalPortPropertyName, IsRequired=false, IsKey=false, IsDefaultCollection=false, DefaultValue=Opts.ExternalHttpPortDefault)]
         public virtual int ExternalPort
@@ -1378,7 +1453,8 @@ namespace EventStoreService.Configuration
         /// Gets or sets internal TCP Port.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("ConfigurationSectionDesigner.CsdFileGenerator", "2.0.1.0")]
-        [global::PropertyCommand(Opts.InternalTcpPortCmd)]
+        [global::CommandLineArgument(Opts.InternalTcpPortCmd)]
+        [global::JsonProperty(Opts.InternalTcpPortJson)]
         [global::System.ComponentModel.DescriptionAttribute("Internal TCP Port.")]
         [global::System.Configuration.ConfigurationPropertyAttribute(global::EventStoreService.Configuration.ClusterTcpElement.InternalPortPropertyName, IsRequired=false, IsKey=false, IsDefaultCollection=false, DefaultValue=Opts.InternalTcpPortDefault)]
         public virtual int InternalPort
@@ -1405,7 +1481,8 @@ namespace EventStoreService.Configuration
         /// Gets or sets internal Secure TCP Port.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("ConfigurationSectionDesigner.CsdFileGenerator", "2.0.1.0")]
-        [global::PropertyCommand(Opts.InternalSecureTcpPortCmd)]
+        [global::CommandLineArgument(Opts.InternalSecureTcpPortCmd)]
+        [global::JsonProperty(Opts.InternalSecureTcpPortJson)]
         [global::System.ComponentModel.DescriptionAttribute("Internal Secure TCP Port.")]
         [global::System.Configuration.ConfigurationPropertyAttribute(global::EventStoreService.Configuration.ClusterTcpElement.InternalSecurePortPropertyName, IsRequired=false, IsKey=false, IsDefaultCollection=false, DefaultValue=Opts.InternalSecureTcpPortDefault)]
         public virtual int InternalSecurePort
@@ -1432,7 +1509,8 @@ namespace EventStoreService.Configuration
         /// Gets or sets external TCP Port.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("ConfigurationSectionDesigner.CsdFileGenerator", "2.0.1.0")]
-        [global::PropertyCommand(Opts.ExternalTcpPortCmd)]
+        [global::CommandLineArgument(Opts.ExternalTcpPortCmd)]
+        [global::JsonProperty(Opts.ExternalTcpPortJson)]
         [global::System.ComponentModel.DescriptionAttribute("External TCP Port.")]
         [global::System.Configuration.ConfigurationPropertyAttribute(global::EventStoreService.Configuration.ClusterTcpElement.ExternalPortPropertyName, IsRequired=false, IsKey=false, IsDefaultCollection=false, DefaultValue=Opts.ExternalTcpPortDefault)]
         public virtual int ExternalPort
@@ -1459,7 +1537,8 @@ namespace EventStoreService.Configuration
         /// Gets or sets external Secure TCP Port.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("ConfigurationSectionDesigner.CsdFileGenerator", "2.0.1.0")]
-        [global::PropertyCommand(Opts.ExternalSecureTcpPortCmd)]
+        [global::CommandLineArgument(Opts.ExternalSecureTcpPortCmd)]
+        [global::JsonProperty(Opts.ExternalSecureTcpPortJson)]
         [global::System.ComponentModel.DescriptionAttribute("External Secure TCP Port.")]
         [global::System.Configuration.ConfigurationPropertyAttribute(global::EventStoreService.Configuration.ClusterTcpElement.ExternalSecurePortPropertyName, IsRequired=false, IsKey=false, IsDefaultCollection=false, DefaultValue=Opts.ExternalSecureTcpPortDefault)]
         public virtual int ExternalSecurePort
@@ -1508,7 +1587,8 @@ namespace EventStoreService.Configuration
         /// Gets or sets the InternalIp.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("ConfigurationSectionDesigner.CsdFileGenerator", "2.0.1.0")]
-        [global::PropertyCommand(Opts.InternalManagerIpCmd)]
+        [global::CommandLineArgument(Opts.InternalManagerIpCmd)]
+        [global::JsonProperty(Opts.InternalManagerIpJson)]
         [global::System.ComponentModel.DescriptionAttribute("The InternalIp.")]
         [global::System.ComponentModel.TypeConverter(typeof(global::EventStoreService.Configuration.IPAddressTypeConverter))]
         [global::System.Configuration.ConfigurationPropertyAttribute(global::EventStoreService.Configuration.ClusterManagerElement.InternalIpPropertyName, IsRequired=false, IsKey=false, IsDefaultCollection=false, DefaultValue="127.0.0.1")]
@@ -1536,7 +1616,8 @@ namespace EventStoreService.Configuration
         /// Gets or sets the ExternalIp.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("ConfigurationSectionDesigner.CsdFileGenerator", "2.0.1.0")]
-        [global::PropertyCommand(Opts.ExternalManagerIpCmd)]
+        [global::CommandLineArgument(Opts.ExternalManagerIpCmd)]
+        [global::JsonProperty(Opts.ExternalManagerIpJson)]
         [global::System.ComponentModel.DescriptionAttribute("The ExternalIp.")]
         [global::System.ComponentModel.TypeConverter(typeof(global::EventStoreService.Configuration.IPAddressTypeConverter))]
         [global::System.Configuration.ConfigurationPropertyAttribute(global::EventStoreService.Configuration.ClusterManagerElement.ExternalIpPropertyName, IsRequired=false, IsKey=false, IsDefaultCollection=false, DefaultValue="127.0.0.1")]
@@ -1564,7 +1645,8 @@ namespace EventStoreService.Configuration
         /// Gets or sets the InternalHttpPort.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("ConfigurationSectionDesigner.CsdFileGenerator", "2.0.1.0")]
-        [global::PropertyCommand(Opts.InternalManagerHttpPortCmd)]
+        [global::CommandLineArgument(Opts.InternalManagerHttpPortCmd)]
+        [global::JsonProperty(Opts.InternalManagerHttpPortJson)]
         [global::System.ComponentModel.DescriptionAttribute("The InternalHttpPort.")]
         [global::System.Configuration.ConfigurationPropertyAttribute(global::EventStoreService.Configuration.ClusterManagerElement.InternalHttpPortPropertyName, IsRequired=false, IsKey=false, IsDefaultCollection=false, DefaultValue=Opts.InternalManagerHttpPortDefault)]
         public virtual int InternalHttpPort
@@ -1591,7 +1673,8 @@ namespace EventStoreService.Configuration
         /// Gets or sets the ExternalHttpPort.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("ConfigurationSectionDesigner.CsdFileGenerator", "2.0.1.0")]
-        [global::PropertyCommand(Opts.ExternalManagerHttpPortCmd)]
+        [global::CommandLineArgument(Opts.ExternalManagerHttpPortCmd)]
+        [global::JsonProperty(Opts.ExternalManagerHttpPortJson)]
         [global::System.ComponentModel.DescriptionAttribute("The ExternalHttpPort.")]
         [global::System.Configuration.ConfigurationPropertyAttribute(global::EventStoreService.Configuration.ClusterManagerElement.ExternalHttpPortPropertyName, IsRequired=false, IsKey=false, IsDefaultCollection=false, DefaultValue=Opts.ExternalManagerHttpPortDefault)]
         public virtual int ExternalHttpPort
@@ -1640,7 +1723,8 @@ namespace EventStoreService.Configuration
         /// Gets or sets whether to use secure internal communication.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("ConfigurationSectionDesigner.CsdFileGenerator", "2.0.1.0")]
-        [global::PropertyCommand(Opts.UseInternalSslCmd)]
+        [global::CommandLineArgument(Opts.UseInternalSslCmd)]
+        [global::JsonProperty(Opts.UseInternalSslJson)]
         [global::System.ComponentModel.DescriptionAttribute("Whether to use secure internal communication.")]
         [global::System.Configuration.ConfigurationPropertyAttribute(global::EventStoreService.Configuration.ClusterSslElement.UseInternalSslPropertyName, IsRequired=false, IsKey=false, IsDefaultCollection=false, DefaultValue=Opts.UseInternalSslDefault)]
         public virtual bool UseInternalSsl
@@ -1667,7 +1751,8 @@ namespace EventStoreService.Configuration
         /// Gets or sets target host of server's SSL certificate.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("ConfigurationSectionDesigner.CsdFileGenerator", "2.0.1.0")]
-        [global::PropertyCommand(Opts.SslTargetHostCmd)]
+        [global::CommandLineArgument(Opts.SslTargetHostCmd)]
+        [global::JsonProperty(Opts.SslTargetHostJson)]
         [global::System.ComponentModel.DescriptionAttribute("Target host of server\'s SSL certificate.")]
         [global::System.Configuration.ConfigurationPropertyAttribute(global::EventStoreService.Configuration.ClusterSslElement.SslTargetHostPropertyName, IsRequired=false, IsKey=false, IsDefaultCollection=false, DefaultValue=Opts.SslTargetHostDefault)]
         public virtual string SslTargetHost
@@ -1694,7 +1779,8 @@ namespace EventStoreService.Configuration
         /// Gets or sets the SslValidateServer.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("ConfigurationSectionDesigner.CsdFileGenerator", "2.0.1.0")]
-        [global::PropertyCommand(Opts.SslValidateServerCmd)]
+        [global::CommandLineArgument(Opts.SslValidateServerCmd)]
+        [global::JsonProperty(Opts.SslValidateServerJson)]
         [global::System.ComponentModel.DescriptionAttribute("The SslValidateServer.")]
         [global::System.Configuration.ConfigurationPropertyAttribute(global::EventStoreService.Configuration.ClusterSslElement.SslValidateServerPropertyName, IsRequired=false, IsKey=false, IsDefaultCollection=false, DefaultValue=Opts.SslValidateServerDefault)]
         public virtual bool SslValidateServer
@@ -1743,9 +1829,10 @@ namespace EventStoreService.Configuration
         /// Gets or sets whether to use DNS lookup to discover other cluster nodes.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("ConfigurationSectionDesigner.CsdFileGenerator", "2.0.1.0")]
-        [global::PropertyCommand(Opts.DiscoverViaDnsCmd)]
+        [global::CommandLineArgument(Opts.DiscoverViaDnsCmd)]
+        [global::JsonProperty(Opts.DiscoverViaDnsJson)]
         [global::System.ComponentModel.DescriptionAttribute("Whether to use DNS lookup to discover other cluster nodes.")]
-        [global::System.Configuration.ConfigurationPropertyAttribute(global::EventStoreService.Configuration.ClusterDnsElement.DiscoverViaDnsPropertyName, IsRequired=false, IsKey=false, IsDefaultCollection=false, DefaultValue=Opts.DiscoverViaDnsDefault)]
+        [global::System.Configuration.ConfigurationPropertyAttribute(global::EventStoreService.Configuration.ClusterDnsElement.DiscoverViaDnsPropertyName, IsRequired=true, IsKey=false, IsDefaultCollection=false, DefaultValue=Opts.DiscoverViaDnsDefault)]
         public virtual bool DiscoverViaDns
         {
             get
@@ -1770,7 +1857,8 @@ namespace EventStoreService.Configuration
         /// Gets or sets dNS name from which other nodes can be discovered.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("ConfigurationSectionDesigner.CsdFileGenerator", "2.0.1.0")]
-        [global::PropertyCommand(Opts.ClusterDnsCmd)]
+        [global::CommandLineArgument(Opts.ClusterDnsCmd)]
+        [global::JsonProperty(Opts.ClusterDnsJson)]
         [global::System.ComponentModel.DescriptionAttribute("DNS name from which other nodes can be discovered.")]
         [global::System.Configuration.ConfigurationPropertyAttribute(global::EventStoreService.Configuration.ClusterDnsElement.ClusterDnsPropertyName, IsRequired=false, IsKey=false, IsDefaultCollection=false, DefaultValue=Opts.ClusterDnsDefault)]
         public virtual string ClusterDns
@@ -1819,7 +1907,8 @@ namespace EventStoreService.Configuration
         /// Gets or sets the port on which cluster nodes' managers are running.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("ConfigurationSectionDesigner.CsdFileGenerator", "2.0.1.0")]
-        [global::PropertyCommand(Opts.ClusterGossipPortCmd)]
+        [global::CommandLineArgument(Opts.ClusterGossipPortCmd)]
+        [global::JsonProperty(Opts.ClusterGossipPortJson)]
         [global::System.ComponentModel.DescriptionAttribute("The port on which cluster nodes\' managers are running.")]
         [global::System.Configuration.ConfigurationPropertyAttribute(global::EventStoreService.Configuration.ClusterGossipElement.PortPropertyName, IsRequired=false, IsKey=false, IsDefaultCollection=false, DefaultValue=Opts.ClusterGossipPortDefault)]
         public virtual int Port
@@ -1894,7 +1983,8 @@ namespace EventStoreService.Configuration
         /// Gets or sets the Address.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("ConfigurationSectionDesigner.CsdFileGenerator", "2.0.1.0")]
-        [global::PropertyCommand(Opts.GossipSeedCmd)]
+        [global::CommandLineArgument(Opts.GossipSeedCmd)]
+        [global::JsonProperty(Opts.GossipSeedJson)]
         [global::System.ComponentModel.DescriptionAttribute("The Address.")]
         [global::System.ComponentModel.TypeConverter(typeof(global::EventStoreService.Configuration.IPEndPointTypeConverter))]
         [global::System.Configuration.ConfigurationPropertyAttribute(global::EventStoreService.Configuration.IPEndpointElement.AddressPropertyName, IsRequired=true, IsKey=true, IsDefaultCollection=false)]

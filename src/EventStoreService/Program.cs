@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using EventStoreService.Configuration;
 using Topshelf;
 
@@ -9,17 +10,19 @@ namespace EventStoreService
         static void Main()
         {
             var configuration = EventStoreServiceConfiguration.Instance;
-
+            
             HostFactory.Run(x =>
             {
-                x.RunAsLocalSystem();
+                x.RunAsLocalService();
                 x.StartAutomatically();
                 x.EnableShutdown();
                 x.EnableServiceRecovery(c => c.RestartService(1));
 
-                x.Service<EventStoreProcessWrapper>(s =>
+                x.UseLog4Net("Log4Net.config");
+
+                x.Service<ProcessWrapper>(s =>
                 {
-                    s.ConstructUsing(name => new EventStoreProcessWrapper(configuration.EventStore));
+                    s.ConstructUsing(name => ProcessWrapper.Create(configuration.EventStore));
                     s.WhenStarted(tc => tc.Start());
                     s.WhenStopped(tc => tc.Stop());
                 });
@@ -30,9 +33,6 @@ namespace EventStoreService
                 x.SetDisplayName(windowsService.DisplayName);
                 x.SetServiceName(windowsService.ServiceName);
             }); 
-
-            Console.ReadLine();
         }
-
     }
 }
