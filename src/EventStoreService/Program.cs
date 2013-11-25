@@ -13,7 +13,7 @@ namespace EventStoreService
             
             HostFactory.Run(x =>
             {
-                x.RunAsLocalService();
+                x.RunAsLocalSystem();
                 x.StartAutomatically();
                 x.EnableShutdown();
                 x.EnableServiceRecovery(c => c.RestartService(1));

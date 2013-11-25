@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using EventStoreService.Configuration.Serialization;
 using log4net;
 using Newtonsoft.Json;
@@ -19,8 +20,8 @@ namespace EventStoreService.Configuration.Strategy
         {
             _configFile = Path.GetTempFileName();
             _jsonSerializer = new JsonSerializer();
-            _jsonSerializer.Converters.Add(new IPAddressConverter());
-            _jsonSerializer.Converters.Add(new IPEndPointConverter());
+            _jsonSerializer.Converters.Add(new ToStringConverter<IPAddress>());
+            _jsonSerializer.Converters.Add(new ToStringConverter<IPEndPoint>());
         }
 
         protected override string GenerateArguments(IEnumerable<Argument> arguments)
