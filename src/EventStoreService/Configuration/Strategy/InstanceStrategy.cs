@@ -56,9 +56,11 @@ namespace EventStoreService.Configuration.Strategy
             {
                 case RunMode.SingleNode:
                     arguments = arguments.Union(ReadConfigurationElement(configuration.SingleNode));
+                    arguments = arguments.Union(ReadConfigurationElement(configuration.Projections));
                     break;
                 case RunMode.Cluster:
                     arguments = arguments.Union(ReadConfigurationElement(configuration.Cluster));
+                    arguments = arguments.Union(ReadConfigurationElement(configuration.Projections));
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
